@@ -15,6 +15,7 @@ export const signIn = (userId) => {
     type: SIGN_IN,
     payload: userId
   };
+  console.log("did sign in");
 }
 
 
@@ -25,14 +26,14 @@ export const signOut = () => {
 }
 
 export const createStream = formValues => async dispatch => {
-  const response = streams.post('/streams', formValues);
+  const response = await streams.post('/streams', formValues);
 
   dispatch({ type: CREATE_STREAM, payload: response.data });
 };
 
 export const fetchStreams = () => async dispatch => {
   const response = await streams.get('/streams');
-
+  console.log("fetchStreams done");
   dispatch({ type: FETCH_STREAMS, payload: response.data });
 };
 
@@ -46,7 +47,7 @@ export const editStream = (id, formValues) => async dispatch => {
   const response = await streams.patch(`/streams/${id}`, formValues);
 
   dispatch({ type: EDIT_STREAM, payload: response.data });
-  
+
 };
 
 export const deleteStream = id => async dispatch => {
